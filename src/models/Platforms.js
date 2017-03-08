@@ -1,8 +1,8 @@
 var m = require('mithril')
 var d3 = require('d3-time-format')
 
-var formatTime = d3.timeFormat("%Y-%m-%d %H:%M:%S");
-formatedDateformat = function(el){
+var formatTime = d3.timeFormat('%Y-%m-%d %H:%M:%S')
+var formatedDateformat = function (el) {
   el.A_PROCESS_DATE = formatTime(el.A_PROCESS_DATE)
   el.B_PROCESS_DATE = formatTime(el.B_PROCESS_DATE)
   return el
@@ -15,7 +15,7 @@ var LostTime = {
   loadList: function () {
     return m.request({
       method: 'GET',
-      url: 'http://wmatvmlr401/lr4/lr4/apiplatform_cleaning.php',
+      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
       withCredentials: true
     }).then(function (result) {
       LostTime.list = result.results.map(function (el) {
@@ -29,8 +29,17 @@ var LostTime = {
           'YWW': el.YWW,
           'CYCLE_TIME': parseFloat(el.CYCLE_TIME),
           'LOST_TIME': parseFloat(el.LOST_TIME),
+
           'ID': el.ID,
+          'CREATION_DATE': '2017-03-08 14:29',
+          'LOT_NUMBER': 'P-PL',
+          'OPERATOR_ID': '884526',
+          'SHIFT': '1',
+          'PROCESS_DATE': '2017-03-08 14:29',
+          'EXPIRATION_DATE': '2017-03-08 22:29',
+          'QTY': '8',
           'COMMENTS': el.COMMENTS || ''
+
         }
       })
     })
@@ -45,18 +54,18 @@ var LostTime = {
     } else {
       LostTime.numberOfRequests = 0
       LostTime.current = LostTime.list.filter(function (el) {
-        return (el.REQID == id) ? true : false
+        return (el.REQID === id)
       }).reduce(function (prev, curr) { return curr }, {})
     }
     // console.log(LostTime.numberOfRequests)
   },
   save: function (e) {
-    console.log(e);
+    console.log(e)
     e.preventDefault()
     // debugger
     return m.request({
       method: 'PUT',
-      url: './index.php/losttime/4x25/shim',
+      url: 'http://wmatvmlr401/lr4/lr4/apiplatform_cleaning.php',
       data: formatedDateformat(Object.assign({}, LostTime.current)),
       withCredentials: false
     }).then(function (data) {
@@ -66,8 +75,5 @@ var LostTime = {
     })
   }
 }
-
-// Carga la lista cada 20 min
-var cron = setInterval(LostTime.loadList,1200000)
 
 module.exports = LostTime
