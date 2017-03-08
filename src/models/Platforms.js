@@ -15,7 +15,7 @@ var LostTime = {
   loadList: function () {
     return m.request({
       method: 'GET',
-      url: './index.php/losttime/4x25/shim',
+      url: 'http://wmatvmlr401/lr4/lr4/apiplatform_cleaning.php',
       withCredentials: true
     }).then(function (result) {
       LostTime.list = result.results.map(function (el) {

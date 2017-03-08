@@ -1,18 +1,20 @@
 var m = require('mithril')
 
-var EventList = require('./views/EventList')
-var UserForm = require('./views/UserForm')
+if (document) { document.title = 'Control de lavados de plataforma' }
+
+var TablaMaterial = require('./views/TablaMaterial')
+var LoadForm = require('./views/LoadForm')
 var Layout = require('./views/Layout')
 
 m.route(document.body, '/list', {
   '/list': {
     render: function () {
-      return m(Layout, m(EventList))
+      return m(Layout, m(TablaMaterial))
     }
   },
-  '/edit/:id': {
+  '/load': {
     render: function (vnode) {
-      return m(Layout, m(UserForm, vnode.attrs))
+      return m(Layout, m(LoadForm, vnode.attrs))
     }
   }
 })
