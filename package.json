@@ -1,0 +1,23 @@
+{
+  "name": "4x25-ControlEquipos",
+  "version": "1.0.0",
+  "description": "Aplicacion para capturar la informacion de los tiempos altos de las maquinas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack src/index.js bin/app.js -d --watch",
+    "startremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/ControlFallas/bin/app.js -d --watch",
+    "buildremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/ControlFallas/bin/app.js -p",
+    "build": "webpack src/index.js bin/app.js -p",
+    "budu": "budo --live --open index.js"
+  },
+  "keywords": [],
+  "author": "Aldo Mendez",
+  "license": "ISC",
+  "dependencies": {
+    "d3-time-format": "^2.0.3",
+    "mithril": "^1.0.0",
+    "vague-time": "^2.4.0",
+    "webpack": "^2.2.1"
+  }
+}
