@@ -1,7 +1,6 @@
 var m = require('mithril')
 var Platforms = require('../models/Platforms')
 var ProgressBar = require('./ProgressBar')
-// var vague = require('vague-time')
 
 module.exports = {
   oninit: Platforms.loadList,
@@ -42,33 +41,6 @@ module.exports = {
           ])
         ])
       ])
-    ]
-    )
-
-    // return m('table.ui.celled.table',
-    //   m('thead',
-    //     m('tr',
-    //       m('th', 'Maquina'),
-    //       m('th', 'Numero de serie'),
-    //       m('th', 'Hora del evento'),
-    //       m('th', 'Tiempo desde el evento'),
-    //       m('th', 'Minutos Perdidos'),
-    //       m('th', 'Tiempo de ciclo (min)'),
-    //       m('th', 'Comentarios'))),
-    //   m('tbody',
-    //   LostTime.list.map(function (losttime) {
-    //     return m('tr',
-    //       m('td', losttime.SYSTEM_ID),
-    //       m('td', losttime.SERIAL_NUM),
-    //       m('td', vague.get({to: losttime.A_PROCESS_DATE})),
-    //       m('td', losttime.CYCLE_TIME),
-    //       m('td', losttime.LOST_TIME),
-    //       m('td', m('a',
-    //         {
-    //           href: '/edit/' + losttime.REQID,
-    //           oncreate: m.route.link
-    //         }, 'Agregar comentario'))
-    //     )
-    //   })))
+    ])
   }
 }
