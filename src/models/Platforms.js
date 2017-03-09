@@ -8,7 +8,7 @@ var parseDateFormat = function (el) {
   return el
 }
 
-var LostTime = {
+var Platform = {
   list: [],
   current: {},
   numberOfRequests: 0,
@@ -18,24 +18,24 @@ var LostTime = {
       url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
       withCredentials: true
     }).then(function (result) {
-      LostTime.list = result.results.map(parseDateFormat)
-      console.log(LostTime.list)
+      Platform.list = result.results.map(parseDateFormat)
+      console.log(Platform.list)
     })
   },
   load: function (id) {
     // TODO: Avoid infinite call in case there is no records in the response
-    if (LostTime.list.length === 0 && LostTime.numberOfRequests < 5) {
-      LostTime.loadList().then(function () {
-        LostTime.load(id)
+    if (Platform.list.length === 0 && Platform.numberOfRequests < 5) {
+      Platform.loadList().then(function () {
+        Platform.load(id)
       })
-      LostTime.numberOfRequests++
+      Platform.numberOfRequests++
     } else {
-      LostTime.numberOfRequests = 0
-      LostTime.current = LostTime.list.filter(function (el) {
+      Platform.numberOfRequests = 0
+      Platform.current = Platform.list.filter(function (el) {
         return (el.REQID === id)
       }).reduce(function (prev, curr) { return curr }, {})
     }
-    // console.log(LostTime.numberOfRequests)
+    // console.log(Platform.numberOfRequests)
   },
   save: function (e) {
     console.log(e)
@@ -47,14 +47,27 @@ var LostTime = {
       // TODO: Tendre que poner una funcion de parseo de fechas que sea mas sencilla
       //       actualmente estoy poniendo una lobreria que es muy pesada para
       //       el beneficio que se optiene
-      // data: formatedDateformat(Object.assign({}, LostTime.current)),
+      // data: formatedDateformat(Object.assign({}, Platform.current)),
       withCredentials: false
     }).then(function (data) {
       m.route.set('/list')
       console.log(data)
       // debugger
     })
+  },
+  setCleaningComplete: function (e) {
+    console.log(e)
+    e.preventDefault()
+    // debugger
+    return m.request({
+      method: 'PUT',
+      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
+      data: {cleaning: 'complete'},
+      withCredentials: false
+    }).then(function (data) {
+      Platform.load()
+    })
   }
 }
 
-module.exports = LostTime
+module.exports = Platform

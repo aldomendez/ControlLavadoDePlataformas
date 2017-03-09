@@ -36,7 +36,7 @@ module.exports = {
         ),
         m('tfoot.full-width', [
           m('tr', [
-            m('th[colspan=5]', [
+            m('th[colspan=6]', [
               m('div.ui.right.floated.small.primary.inverted.button', 'Completar lavado')
             ])
           ])
