@@ -10,7 +10,9 @@ var utils = {
     }
   },
   parseDate: function (d) {
-    return new Date(d.substring(0, 4), d.substring(4, 6) - 1, d.substring(6, 8), d.substring(8, 10), d.substring(10, 12), d.substring(12, 14))
+    var dateComponents = d.split('-')
+    return new Date(dateComponents[0], dateComponents[1] - 1, dateComponents[2], dateComponents[3], dateComponents[4])
+    // return new Date(d.substring(0, 4), d.substring(4, 6) - 1, d.substring(6, 8), d.substring(8, 10), d.substring(10, 12), d.substring(12, 14))
   },
   currentShift: function () {
     var d, day, hour

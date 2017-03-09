@@ -1,10 +1,10 @@
 var m = require('mithril')
-var LostTime = require('../models/LostTime')
+var Platforms = require('../models/Platforms')
 var ProgressBar = require('./ProgressBar')
 // var vague = require('vague-time')
 
 module.exports = {
-  oninit: LostTime.loadList,
+  oninit: Platforms.loadList,
   view: function () {
     return m('section', [m('h1', 'Material listo para usar'),
       m('table.ui.striped.compact.table', [
@@ -13,18 +13,26 @@ module.exports = {
             m('th.single.line', 'Lote'),
             m('th', 'Cantidad'),
             m('th', 'Expiracion'),
+            m('th', 'Usar'),
             m('th', 'Operador'),
             m('th', 'Comentarios')
           ])
         ),
         m('tbody',
-          m('tr', [
-            m('td.collapsing', m('b', 'P-LP1212611021')),
-            m('td.collapsing', m('b', '8')),
-            m('td', m(ProgressBar)),
-            m('td', '884526'),
-            m('td', '')
-          ])
+          Platforms.list.map(function (el) {
+            return m('tr', [
+              m('td.collapsing', m('b', el.LOT_NUMBER)),
+              m('td.collapsing', m('b', el.QTY)),
+              m('td', m(ProgressBar, el)),
+              m('td', m('a',
+                {
+                  href: '/edit/' + Platforms.REQID,
+                  oncreate: m.route.link
+                }, 'Usada')),
+              m('td', el.OPERATOR_ID),
+              m('td', el.COMMENTS)
+            ])
+          })
         ),
         m('tfoot.full-width', [
           m('tr', [

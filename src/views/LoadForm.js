@@ -1,8 +1,8 @@
 var m = require('mithril')
-var LostTime = require('../models/LostTime')
+var Platforms = require('../models/Platforms')
 
 module.exports = {
-  oninit: function (vnode) { if (vnode.attr) { LostTime.load(vnode.attrs.id) } },
+  oninit: function (vnode) { if (vnode.attr) { Platforms.load(vnode.attrs.id) } },
   view: function () {
     return m('section', [
       m('form.ui.form', [
