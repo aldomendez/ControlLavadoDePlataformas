@@ -40,17 +40,14 @@ var Platform = {
     }
     // console.log(Platform.numberOfRequests)
   },
-  save: function (e) {
+  setMaterialToClean: function (e) {
     console.log(e)
     e.preventDefault()
     // debugger
     return m.request({
       method: 'PUT',
       url: 'http://wmatvmlr401/lr4/lr4/apiplatform_cleaning.php',
-      // TODO: Tendre que poner una funcion de parseo de fechas que sea mas sencilla
-      //       actualmente estoy poniendo una lobreria que es muy pesada para
-      //       el beneficio que se optiene
-      // data: formatedDateformat(Object.assign({}, Platform.current)),
+      data: {},
       withCredentials: false
     }).then(function (data) {
       m.route.set('/list')

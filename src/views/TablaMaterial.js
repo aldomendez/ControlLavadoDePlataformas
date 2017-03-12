@@ -23,19 +23,28 @@ module.exports = {
           ])
         ),
         m('tbody',
-          Platforms.list.map(function (el) {
-            return m('tr', {key: el.ID}, [
-              m('td.collapsing', m('b', el.USED + ' - ' + el.LOT_NUMBER)),
-              m('td.collapsing', m('b', el.QTY)),
-              m('td', m(ProgressBar, {element: el, time: Platforms.currentTime})),
-              m('td', m('a',
-                { 'data-value': el.ID,
-                  onclick: m.withAttr('data-value', Platforms.markAsUsed, el)
-                }, 'Usada')),
-              m('td', el.OPERATOR_ID),
-              m('td', el.COMMENTS)
+          // Mostrar un mensaje de que no hay elementos en la lista
+          // y un enlace que te lleve a el formulario
+          (Platforms.list.length > 0)
+            ? Platforms.list.map(function (el) {
+              return m('tr', {key: el.ID}, [
+                m('td.collapsing', m('b', el.USED + ' - ' + el.LOT_NUMBER)),
+                m('td.collapsing', m('b', el.QTY)),
+                m('td', m(ProgressBar, {element: el, time: Platforms.currentTime})),
+                m('td', m('a',
+                  { 'data-value': el.ID,
+                    onclick: m.withAttr('data-value', Platforms.markAsUsed, el)
+                  }, 'Usada')),
+                m('td', el.OPERATOR_ID),
+                m('td', el.COMMENTS)
+              ])
+            })
+            : m('tr', [
+              m('td[colspan=6', [
+                'No hay Plataformas activas, hay que lavar material - ',
+                m('a.item[href=/load]', { oncreate: m.route.link }, 'Carga de material')
+              ])
             ])
-          })
         ),
         m('tfoot.full-width', [
           m('tr', [

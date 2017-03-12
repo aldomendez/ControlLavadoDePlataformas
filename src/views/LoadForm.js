@@ -1,5 +1,8 @@
 var m = require('mithril')
 var Platforms = require('../models/Platforms')
+var User = require('../models/User')
+var MaterialsToClean = require('../models/MaterialToClean')
+var utils = require('../utils')
 
 module.exports = {
   oninit: function (vnode) { if (vnode.attr) { Platforms.load(vnode.attrs.id) } },
@@ -8,11 +11,11 @@ module.exports = {
       m('form.ui.form', [
         m('h3', 'Informacion del operador'),
         m('div.two.fields', [
-          m('div.field', [m('label', 'Numero del operador'), m('input[type=text]')]),
-          m('div.field', [m('label', 'Turno'), m('input[type=text]')])
+          m('div.field', [m('label', 'Numero del operador'), m('input[type=text]', {oninput: m.withAttr('value', User.setId)})]),
+          m('div.field', [m('label', 'Turno'), m('input[type=text]', {value: utils.currentShift()})])
         ])
       ]),
-      m('form.ui.form', [
+      m('form.ui.form', {onsubmit: MaterialsToClean.setNewLotToClean}, [
         m('h3', 'Materiales'),
         m('div.three.fields', [
           m('div.field', [m('label', 'Lote'), m('input[type=text]')]),
