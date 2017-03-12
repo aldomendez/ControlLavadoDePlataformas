@@ -9,6 +9,8 @@ var parseDateFormat = function (el) {
 }
 
 var Platform = {
+  currentTime: new Date(),
+  serverTime: new Date(),
   list: [],
   current: {},
   numberOfRequests: 0,
@@ -18,8 +20,9 @@ var Platform = {
       url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
       withCredentials: true
     }).then(function (result) {
+      Platform.serverTime = utils.parseDate(result.timestamp)
       Platform.list = result.results.map(parseDateFormat)
-      console.log(Platform.list)
+      console.log(Platform)
     })
   },
   load: function (id) {
@@ -55,17 +58,27 @@ var Platform = {
       // debugger
     })
   },
+  markAsUsed: function (e) {
+    return m.request({
+      method: 'POST',
+      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/markAsUsed',
+      data: { id: this.ID },
+      withCredentials: false
+    }).then(function (data) {
+      Platform.loadList()
+    })
+  },
   setCleaningComplete: function (e) {
     console.log(e)
     e.preventDefault()
     // debugger
     return m.request({
       method: 'PUT',
-      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
+      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/completeCleaning',
       data: {cleaning: 'complete'},
       withCredentials: false
     }).then(function (data) {
-      Platform.load()
+      Platform.loadList()
     })
   }
 }
