@@ -3,7 +3,14 @@ var m = require('mithril')
 
 var User = {
   list: [],
+  lot: '',
+  qty: '',
   setNewLotToClean: function (e) {
+    User.list.unshift({
+      lot: User.lot,
+      qty: User.qty,
+      comment: ''
+    })
     e.preventDefault()
     console.log(e)
   },
