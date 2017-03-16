@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack src/index.js bin/app.js -d --watch",
-    "dev": "webpack-dev-server --env.dev",
+    "dev": "webpack-dev-server --env.dev --hot",
     "build:dev": "webpack --env.dev",
     "prebuild": "rimraf dist",
     "build": "webpack -p --env.prod ",
@@ -17,8 +17,8 @@
   "author": "Aldo Mendez",
   "license": "ISC",
   "dependencies": {
-    "d3-time-format": "^2.0.3",
-    "mithril": "^1.0.0",
+    "d3-time-format": "^2.0.5",
+    "mithril": "^1.0.1",
     "vague-time": "^2.4.0"
   },
   "devDependencies": {
