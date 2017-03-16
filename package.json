@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack src/index.js bin/app.js -d --watch",
-    "dev": "webpack-dev-server",
-    "build:dev": "webpack",
-    "build": "webpack src/index.js bin/app.js -p",
+    "dev": "webpack-dev-server --env.dev",
+    "build:dev": "webpack --env.dev",
+    "prebuild": "rimraf dist",
+    "build": "webpack -p --env.prod ",
     "startremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -d --watch",
     "buildremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -p"
   },
@@ -21,8 +22,10 @@
     "vague-time": "^2.4.0"
   },
   "devDependencies": {
+    "rimraf": "^2.6.1",
     "webpack": "^2.2.1",
-    "webpack-validator": "^2.3.0",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-validator": "^2.3.0"
   }
 }

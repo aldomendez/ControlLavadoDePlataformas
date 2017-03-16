@@ -1,13 +1,18 @@
 const webpackValidator = require('webpack-validator')
 const { resolve } = require('path')
-module.exports = () => {
+const { getIfUtils } = require('webpack-config-utils')
+
+module.exports = env => {
+  const { ifProd, ifNotProd } = getIfUtils(env)
   return webpackValidator({
     context: resolve('src'),
     entry: './index.js',
     output: {
       path: resolve('dist'),
       filename: 'bundle.js',
-      publicPath: '/dist/'
-    }
+      publicPath: '/dist/',
+      pathinfo: ifNotProd()
+    },
+    devtool: ifProd('source-map', 'eval')
   })
 }
