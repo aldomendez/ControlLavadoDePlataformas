@@ -22,6 +22,11 @@
     "vague-time": "^2.4.0"
   },
   "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2016": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
     "rimraf": "^2.6.1",
     "webpack": "^2.2.1",
     "webpack-config-utils": "^2.3.0",
