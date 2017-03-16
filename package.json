@@ -1,11 +1,13 @@
 {
-  "name": "control-de-equipos-4x25",
+  "name": "control-de-lavados-de-plataforma-de-4x25",
   "version": "1.0.0",
   "description": "Aplicacion para capturar la informacion de los tiempos altos de las maquinas",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack src/index.js bin/app.js -d --watch",
+    "dev": "webpack-dev-server",
+    "build:dev": "webpack",
     "build": "webpack src/index.js bin/app.js -p",
     "startremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -d --watch",
     "buildremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -p"
@@ -16,7 +18,11 @@
   "dependencies": {
     "d3-time-format": "^2.0.3",
     "mithril": "^1.0.0",
-    "vague-time": "^2.4.0",
-    "webpack": "^2.2.1"
+    "vague-time": "^2.4.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1",
+    "webpack-validator": "^2.3.0",
+    "webpack-dev-server": "^2.4.2"
   }
 }
