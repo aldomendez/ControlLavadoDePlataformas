@@ -1,15 +1,20 @@
+const webpack = require('webpack')
 const webpackValidator = require('webpack-validator')
 const { resolve } = require('path')
-const { getIfUtils } = require('webpack-config-utils')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { getIfUtils, removeEmpty } = require('webpack-config-utils')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 module.exports = env => {
   const { ifProd, ifNotProd } = getIfUtils(env)
   return webpackValidator({
     context: resolve('src'),
-    entry: './index.js',
+    entry: {
+      app: './index.js'
+    },
     output: {
       path: resolve('dist'),
-      filename: 'bundle.js',
+      filename: 'bundle.[name].[hash] .js',
       publicPath: '/dist/',
       pathinfo: ifNotProd()
     },
@@ -19,6 +24,17 @@ module.exports = env => {
         { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules / },
         { test: /\.css$/, loaders: ['style', 'css-loader'] }
       ]
-    }
+    },
+    plugins: removeEmpty([
+      new ProgressBarPlugin(),
+      ifProd(new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      })),
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        inject: 'body',
+        favicon: '../favicon.ico'
+      })
+    ])
   })
 }
