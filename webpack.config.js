@@ -4,6 +4,7 @@ const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 
 module.exports = env => {
   const { ifProd, ifNotProd } = getIfUtils(env)
@@ -21,18 +22,20 @@ module.exports = env => {
     devtool: ifProd('source-map', 'eval'),
     module: {
       loaders: [
-        { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules / },
+        { test: /\.js$/, loaders: ['babel-loader?compact=false'], exclude: /node_modules / },
         { test: /\.css$/, loaders: ['style', 'css-loader'] }
       ]
     },
     plugins: removeEmpty([
+      // new ExtractTextPlugin(ifProd('styles.[name].[chunkhash].css', 'style.[name].css')),
       new ProgressBarPlugin(),
+      ifProd(new InlineManifestWebpackPlugin()),
       ifProd(new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
+        name: ['vendor', 'manifest ']
       })),
       new HtmlWebpackPlugin({
         template: './index.html',
-        inject: 'body',
+        // inject: 'body',
         favicon: '../favicon.ico'
       })
     ])
