@@ -14,8 +14,8 @@ module.exports = env => {
     },
     output: {
       path: resolve('dist'),
-      filename: 'bundle.[name].[hash] .js',
-      publicPath: '/dist/',
+      filename: 'bundle.[name].[hash].js',
+      publicPath: ifProd('http://wmatvmlr401/lr4/4x25-Lavado-de-plataformas/', '/'),
       pathinfo: ifNotProd()
     },
     devtool: ifProd('source-map', 'eval'),
