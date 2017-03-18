@@ -1,4 +1,7 @@
 var m = require('mithril')
+if (process.env === 'production') {
+  require('offline-plugin/runtime').install()
+}
 
 if (document) { document.title = 'Control de lavados de plataforma' }
 

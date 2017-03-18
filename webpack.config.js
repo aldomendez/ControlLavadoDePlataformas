@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 
 module.exports = env => {
   const { ifProd, ifNotProd } = getIfUtils(env)
@@ -37,6 +38,12 @@ module.exports = env => {
         template: './index.html',
         // inject: 'body',
         favicon: '../favicon.ico'
+      }),
+      ifProd(new OfflinePlugin()),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: ifProd('"production"', '"development"')
+        }
       })
     ])
   })
