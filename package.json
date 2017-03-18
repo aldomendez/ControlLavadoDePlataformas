@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack src/index.js bin/app.js -d --watch",
-    "dev": "webpack-dev-server --env.dev --hot",
+    "dev": "webpack-dev-server --env.dev",
     "build:dev": "npm run prebuild && webpack -d --env.dev",
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf \\\\wmatvmlr401\\htdocs\\lr4\\4x25-lavado-de-plataformas",
     "build": "webpack -p --env.prod ",
     "startremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -d --watch",
     "buildremote": "webpack src/index.js //wmatvmlr401/htdocs/lr4/4x25-ControlLavadoPlataformas/bin/app.js -p"

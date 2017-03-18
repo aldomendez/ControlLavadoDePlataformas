@@ -15,7 +15,7 @@ module.exports = env => {
       app: './index.js'
     },
     output: {
-      path: resolve('dist'),
+      path: ifProd(resolve('\\\\wmatvmlr401\\htdocs\\lr4\\4x25-lavado-de-plataformas'), resolve('dist')),
       filename: 'bundle.[name].[hash].js',
       publicPath: ifProd('http://wmatvmlr401/lr4/4x25-Lavado-de-plataformas/', '/'),
       pathinfo: ifNotProd()
