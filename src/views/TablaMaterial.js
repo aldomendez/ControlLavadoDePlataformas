@@ -50,7 +50,7 @@ module.exports = {
           m('tr', [
             m('th[colspan=6]', [
               m('div.ui.right.floated.small.secondary.inverted.button', {onclick: Platforms.load}, 'Actualizar'),
-              m('div.ui.right.floated.small.primary.inverted.button', {onclick: completarLavados}, 'Completar lavado')
+              (Platforms.list.filter(function (el) { return el.ISCLEANING === 'Y' }).length !== 0) ? m('div.ui.right.floated.small.primary.inverted.button', {onclick: completarLavados}, 'Completar lavado') : ''
             ])
           ])
         ])
