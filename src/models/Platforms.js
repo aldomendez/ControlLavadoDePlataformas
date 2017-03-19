@@ -18,7 +18,7 @@ var Platform = {
     return m.request({
       method: 'GET',
       url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/liveLots',
-      withCredentials: true
+      withCredentials: false
     }).then(function (result) {
       Platform.serverTime = utils.parseDate(result.timestamp)
       Platform.list = result.results.map(parseDateFormat)
@@ -71,9 +71,8 @@ var Platform = {
     // debugger
     return m.request({
       method: 'PUT',
-      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/completeCleaning',
-      data: {cleaning: 'complete'},
-      withCredentials: false
+      url: 'http://wmatvmlr401/lr4/api/platform_cleaning.php/completeCleaning'
+      // data: {cleaning: 'complete'}
     }).then(function (data) {
       Platform.loadList()
     })

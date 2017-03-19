@@ -11,7 +11,7 @@ var Layout = require('./views/Layout')
 
 m.route(document.body, '/list', {
   '/list': {
-    render: function () {
+    render: function (vnode) {
       return m(Layout, m(TablaMaterial))
     }
   },
